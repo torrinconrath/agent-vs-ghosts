@@ -13,6 +13,8 @@ Throughout this game, you will need to dodge and shoot the incoming ghosts. You 
 * Poison: When the player shoots the enemy, it will spawn a zombie at the previously killed enemy's place. It will act as a dummy drawing some of the ghosts' attention to it.
 * Barrier: The player will gain a shield which can absorb a hit.
 
+#
+
 Feel free to leave suggestions for updates at 
 torrin@vt.edu
 
