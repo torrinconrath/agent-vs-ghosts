@@ -7,8 +7,8 @@ Throughout this game, you will need to dodge and shoot the incoming ghosts. You 
 
 # Powerups
 
-*Lightning: The player doubles their speed.
-*Cannon: No matter which arrow key the player clicks, it will shoot bullets in all four directions.
-*Bomb: A bomb will start counting down and after five seconds will wipe all the ghosts on the map.
-*Poison: When the player shoots the enemy, it will spawn a zombie at the previously killed enemy's place. It will act as a dummy drawing some of the ghosts' attention to it.
-*Barrier: The player will gain a shield which can absorb a hit.
+* Lightning: The player doubles their speed.
+* Cannon: No matter which arrow key the player clicks, it will shoot bullets in all four directions.
+* Bomb: A bomb will start counting down and after five seconds will wipe all the ghosts on the map.
+* Poison: When the player shoots the enemy, it will spawn a zombie at the previously killed enemy's place. It will act as a dummy drawing some of the ghosts' attention to it.
+* Barrier: The player will gain a shield which can absorb a hit.
