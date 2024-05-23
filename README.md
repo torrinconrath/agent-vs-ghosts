@@ -11,8 +11,11 @@ Throughout this game, you will need to dodge and shoot the incoming ghosts. You 
 * Lightning: The player doubles their speed.
 * Cannon: No matter which arrow key the player clicks, it will shoot bullets in all four directions.
 * Bomb: A bomb will start counting down and after five seconds will wipe all the ghosts on the map.
-* Poison: When the player shoots the enemy, it will spawn a zombie at the previously killed enemy's place. It will act as a dummy drawing some of the ghosts' attention to it.
-* Barrier: The player will gain a shield which can absorb a hit.
+* Infection: When the player shoots the enemy, it will spawn a zombie at the previously killed enemy's place. It will act as a dummy drawing some of the ghosts' attention to it.
+* Shield: The player will gain a shield which can absorb a hit.
+* Star: The player turn into a saiyan becoming invincible, doubling their speed, and shooting gold bullets in all directions.
+* Honey: The enemies will have their speeds cut in half.
+* Firecracker: The player will shoot rockets, which will explode when in proximity with an enemy. 
 
 #
 
