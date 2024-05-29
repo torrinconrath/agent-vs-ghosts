@@ -1,4 +1,4 @@
-## Agent Vs Ghosts
+## Agent Vs Ghosts (ver. 1.2)
 This has all the relevant files for my pygame project, Agent Vs Ghosts. This includes the script and remains of the executing process.
 You can unzip and file from here to play, but I suggest to just download the executable from my Project's Page (https://torrinconrath.github.io/) as you won't need to worry about the unnecessary files.
 
