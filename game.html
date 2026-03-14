@@ -604,10 +604,21 @@ function draw() {
   drawPickups(g);
 
   // HUD: score
-  ctx.fillStyle = '#000';
   ctx.font = 'bold 42px "Courier New", Courier, monospace';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'top';
+  // Pixel-style outline: 8 offset draws in a cross pattern
+  ctx.fillStyle = '#000';
+  ctx.fillText('Score: ' + g.score, W/2 - 2, 10);
+  ctx.fillText('Score: ' + g.score, W/2 + 2, 10);
+  ctx.fillText('Score: ' + g.score, W/2, 10 - 2);
+  ctx.fillText('Score: ' + g.score, W/2, 10 + 2);
+  ctx.fillText('Score: ' + g.score, W/2 - 2, 10 - 2);
+  ctx.fillText('Score: ' + g.score, W/2 + 2, 10 - 2);
+  ctx.fillText('Score: ' + g.score, W/2 - 2, 10 + 2);
+  ctx.fillText('Score: ' + g.score, W/2 + 2, 10 + 2);
+  // White fill on top
+  ctx.fillStyle = '#ffffff';
   ctx.fillText('Score: ' + g.score, W/2, 10);
 
   // HUD: hearts
