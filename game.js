@@ -58,6 +58,7 @@ function renderIconCanvases() {
 // ─────────────────────────────────────────────
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
+ctx.imageSmoothingEnabled = false;
 const overlay = document.getElementById('overlay');
 const startBtn = document.getElementById('startBtn');
 const overlaySubtitle = document.getElementById('overlaySubtitle');
@@ -75,14 +76,6 @@ const CHAR_SPEED = 4;
 const BULLET_SPEED = 10;
 const ENEMY_SPEED = 6;
 const ENEMY_SPEED_SLOW = 3;
-
-// ── HiDPI / retina fix ──
-const dpr = window.devicePixelRatio || 1;
-canvas.width  = W * dpr;
-canvas.height = H * dpr;
-canvas.style.width  = W + 'px';
-canvas.style.height = H + 'px';
-ctx.scale(dpr, dpr);
 
 let game = null, animId = null, keys = {};
 let highScore = 0;
