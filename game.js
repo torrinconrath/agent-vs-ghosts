@@ -121,7 +121,7 @@ function createGame() {
     spawnSpeedupInterval: 600, // 10000ms
     spawnSpeedupPct: 0.05,
     powerupTimer: 0,
-    powerupSpawn: 480,    // 8000ms
+    powerupSpawn: 600,    // 10000ms
     // Entities
     character: createCharacter(),
     bullets: [],
