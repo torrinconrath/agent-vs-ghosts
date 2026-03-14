@@ -120,6 +120,7 @@ function createGame() {
     spawnTimer: 0,
     spawnSpeedupInterval: 600, // 10000ms
     spawnSpeedupPct: 0.05,
+    spawnSpeedupTimer: 0,
     powerupTimer: 0,
     powerupSpawn: 600,    // 10000ms
     // Entities
@@ -194,11 +195,14 @@ function update() {
   if (g.spawnTimer >= g.spawnDelay) {
     g.spawnTimer = 0;
     g.enemies.push(makeEnemy(ch));
-    // speedup every spawnSpeedupInterval frames
-    if (g.tick % g.spawnSpeedupInterval === 0) {
-      g.spawnDelay = Math.max(10, g.spawnDelay * (1 - g.spawnSpeedupPct));
-    }
   }
+  // ── DIFFICULTY RAMP ──
+  g.spawnSpeedupTimer++;
+  if (g.spawnSpeedupTimer >= g.spawnSpeedupInterval) {
+    g.spawnSpeedupTimer = 0;
+    g.spawnDelay = Math.max(10, g.spawnDelay * (1 - g.spawnSpeedupPct));
+  }
+  
 
   // ── SPAWN POWERUPS ──
   g.powerupTimer++;
