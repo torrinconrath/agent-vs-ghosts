@@ -122,7 +122,7 @@ const SPRITES_B64 = {
   enemy:          'images/enemy.png',
   zombie:         'images/zombie.png',
   bullet:         'images/bullet.png',
-  gold_bullet:    'images/gold_bullet.png',
+  gold_bullet:    'images/bullet_gold.png',
   heart:          'images/heart.png',
   shield:         'images/shield.png',
   lightning:      'images/lightning.png',
@@ -256,6 +256,8 @@ function createGame() {
     lights: false,         // firecracker mode
     lastEnemyLocation: [0, 0],
     hitCooldown: 0,
+    bombActive: false,
+    bombTimer: 0,
   };
 }
 
@@ -345,13 +347,12 @@ function update() {
     // Bullet collision
     let killed = false;
     if (g.lights) {
-      // Firecracker: proximity explosion within 100px of bullet
+      // Firecracker: enemy dies if within 100px of any bullet; spawn firework at that bullet
       for (let bi = g.bullets.length - 1; bi >= 0; bi--) {
         const b = g.bullets[bi];
         const d = Math.hypot((e.x+ENEMY_SIZE/2) - b.x, (e.y+ENEMY_SIZE/2) - b.y);
         if (d <= 100) {
           g.fireworks.push({ x: b.x, y: b.y, timer: 0 });
-          g.bullets.splice(bi, 1);
           killed = true;
           break;
         }
@@ -486,70 +487,75 @@ function spawnPowerup(g) {
 
 function updatePickups(g, ch) {
   const cx = ch.x, cy = ch.y;
-  const DESPAWN = 420; // 7000ms
+  const DESPAWN_TICKS = 420; // 7000ms at 60fps
+  const ACTIVE_TICKS  = 300; // 5000ms at 60fps
 
-  function checkCollect(arr, onCollect) {
-    return arr.filter(p => {
-      if (g.tick - p.spawnTick >= DESPAWN) return false;
-      if (!p.active && rectsOverlap(cx, cy, CHAR_SIZE, CHAR_SIZE, p.x, p.y, p.size, p.size)) {
+  // Run expire/restore callbacks first, then filter dead items
+  function processGroup(arr, onCollect, onExpire) {
+    arr.forEach(p => {
+      const age = g.tick - p.spawnTick;
+      // Pickup
+      if (!p.active && !p.dead && rectsOverlap(cx, cy, CHAR_SIZE, CHAR_SIZE, p.x, p.y, p.size, p.size)) {
         p.active = true;
         p.activeTick = g.tick;
-        onCollect(p);
+        if (onCollect) onCollect(p);
       }
-      if (p.active && g.tick - p.activeTick >= 300) return false; // 5000ms active
-      return true;
+      // Expire after active duration
+      if (p.active && !p.restored && g.tick - p.activeTick >= ACTIVE_TICKS) {
+        if (onExpire) onExpire(p);
+        p.restored = true;
+        p.dead = true;
+      }
+      // Despawn if never picked up
+      if (!p.active && age >= DESPAWN_TICKS) {
+        p.dead = true;
+      }
     });
+    return arr.filter(p => !p.dead);
   }
 
-  g.lightnings = checkCollect(g.lightnings, p => { g.character.speed *= 2; });
-  // restore speed when lightning expires
-  g.lightnings.forEach(p => {
-    if (p.active && g.tick - p.activeTick >= 300 && !p.restored) {
-      g.character.speed /= 2; p.restored = true;
-    }
-  });
+  g.lightnings = processGroup(g.lightnings,
+    p => { g.character.speed *= 2; },
+    p => { g.character.speed /= 2; }
+  );
 
-  g.cannons = checkCollect(g.cannons, p => { g.fourBullet = true; });
-  g.cannons.forEach(p => {
-    if (p.active && g.tick - p.activeTick >= 300 && !p.restored) { g.fourBullet = false; p.restored = true; }
-  });
+  g.cannons = processGroup(g.cannons,
+    p => { g.fourBullet = true; },
+    p => { g.fourBullet = false; }
+  );
 
-  g.bombs = checkCollect(g.bombs, p => { p.exploding = true; g.bombActive = true; g.bombTimer = 0; });
+  // Bombs: special — no onExpire here, detonation handled in update()
+  g.bombs = processGroup(g.bombs,
+    p => { p.exploding = true; g.bombActive = true; g.bombTimer = 0; },
+    null
+  );
 
-  g.infections = checkCollect(g.infections, p => { g.infected = true; });
-  g.infections.forEach(p => {
-    if (p.active && g.tick - p.activeTick >= 300 && !p.restored) { g.infected = false; p.restored = true; }
-  });
+  g.infections = processGroup(g.infections,
+    p => { g.infected = true; },
+    p => { g.infected = false; }
+  );
 
-  g.barriers = checkCollect(g.barriers, p => {
-    if (g.shields.length < 3) g.shields.push({ x: 20 + g.shields.length * 50, y: 20 });
-  });
+  g.barriers = processGroup(g.barriers,
+    p => {
+      if (g.shields.length < 3) g.shields.push({ x: 20 + g.shields.length * 50, y: 20 });
+    },
+    null
+  );
 
-  g.stars = checkCollect(g.stars, p => {
-    g.character.saiyan = true;
-    g.character.speed *= 2;
-    g.fourBullet = true;
-    g.invulnerable = true;
-  });
-  g.stars.forEach(p => {
-    if (p.active && g.tick - p.activeTick >= 300 && !p.restored) {
-      g.character.saiyan = false;
-      g.character.speed /= 2;
-      g.fourBullet = false;
-      g.invulnerable = false;
-      p.restored = true;
-    }
-  });
+  g.stars = processGroup(g.stars,
+    p => { g.character.saiyan = true; g.character.speed *= 2; g.fourBullet = true; g.invulnerable = true; },
+    p => { g.character.saiyan = false; g.character.speed /= 2; g.fourBullet = false; g.invulnerable = false; }
+  );
 
-  g.honeys = checkCollect(g.honeys, p => { g.slowed = true; });
-  g.honeys.forEach(p => {
-    if (p.active && g.tick - p.activeTick >= 300 && !p.restored) { g.slowed = false; p.restored = true; }
-  });
+  g.honeys = processGroup(g.honeys,
+    p => { g.slowed = true; },
+    p => { g.slowed = false; }
+  );
 
-  g.firecrackers = checkCollect(g.firecrackers, p => { g.lights = true; });
-  g.firecrackers.forEach(p => {
-    if (p.active && g.tick - p.activeTick >= 300 && !p.restored) { g.lights = false; p.restored = true; }
-  });
+  g.firecrackers = processGroup(g.firecrackers,
+    p => { g.lights = true; },
+    p => { g.lights = false; }
+  );
 }
 
 // ─────────────────────────────────────────────
@@ -626,10 +632,11 @@ function draw() {
 }
 
 function drawPickups(g) {
-  function drawGroup(arr, key, altKey) {
+  function drawGroup(arr, key) {
     arr.forEach(p => {
-      if (p.active) return; // hide once collected
-      const imgKey = p.exploding ? 'bomb_exploding' : (altKey || key);
+      if (p.dead) return;
+      let imgKey = key;
+      if (key === 'bomb') imgKey = p.exploding ? 'bomb_exploding' : 'bomb';
       const img = IMG[imgKey];
       if (img) ctx.drawImage(img, p.x, p.y, p.size, p.size);
     });
