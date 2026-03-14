@@ -1,15 +1,4 @@
 // ─────────────────────────────────────────────
-// SET SCREEN HiDPI FIX
-// ─────────────────────────────────────────────
-const dpr = window.devicePixelRatio || 1;
-canvas.width  = W * dpr;
-canvas.height = H * dpr;
-canvas.style.width  = W + 'px';
-canvas.style.height = H + 'px';
-ctx.scale(dpr, dpr);
-
-
-// ─────────────────────────────────────────────
 // SPRITES
 // ─────────────────────────────────────────────
 const SPRITES_B64 = {
@@ -86,6 +75,14 @@ const CHAR_SPEED = 4;
 const BULLET_SPEED = 10;
 const ENEMY_SPEED = 6;
 const ENEMY_SPEED_SLOW = 3;
+
+// ── HiDPI / retina fix ──
+const dpr = window.devicePixelRatio || 1;
+canvas.width  = W * dpr;
+canvas.height = H * dpr;
+canvas.style.width  = W + 'px';
+canvas.style.height = H + 'px';
+ctx.scale(dpr, dpr);
 
 let game = null, animId = null, keys = {};
 let highScore = 0;
