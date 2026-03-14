@@ -1,7 +1,5 @@
 // ─────────────────────────────────────────────
 // SPRITES
-// Paths are relative — works both locally and on Vercel.
-// The firecracker images live in images/firecracker/, all others in images/.
 // ─────────────────────────────────────────────
 const SPRITES_B64 = {
   agent:          'images/agent.png',
