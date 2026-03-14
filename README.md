@@ -1,4 +1,4 @@
-## Agent Vs Ghosts (ver. 1.2)
+## Agent Vs Ghosts (ver. 1.3)
 This has all the relevant files for my older project, Agent Vs Ghosts. This both new (HTML+JS) and old legacy (Python) files.
 This game is currently playable on my Project's Page: https://torrinconrath.github.io/
 

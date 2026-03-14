@@ -116,12 +116,12 @@ function createGame() {
     score: 0,
     tick: 0,
     // Spawn timing (ms equivalent via frame counting at 60fps)
-    spawnDelay: 180,      // 3000ms / ~16.6ms per frame
+    spawnDelay: 120,      // 2000ms 
     spawnTimer: 0,
-    spawnSpeedupInterval: 1800, // 30000ms
-    spawnSpeedupPct: 0.03,
+    spawnSpeedupInterval: 600, // 10000ms
+    spawnSpeedupPct: 0.05,
     powerupTimer: 0,
-    powerupSpawn: 600,    // 10000ms
+    powerupSpawn: 480,    // 8000ms
     // Entities
     character: createCharacter(),
     bullets: [],
@@ -533,7 +533,7 @@ function draw() {
 function drawPickups(g) {
   function drawGroup(arr, key) {
     arr.forEach(p => {
-      if (p.dead) return;
+      if (p.dead || p.active) return;
       let imgKey = key;
       if (key === 'bomb') imgKey = p.exploding ? 'bomb_exploding' : 'bomb';
       const img = IMG[imgKey];
