@@ -1,4 +1,15 @@
 // ─────────────────────────────────────────────
+// SET SCREEN HiDPI FIX
+// ─────────────────────────────────────────────
+const dpr = window.devicePixelRatio || 1;
+canvas.width  = W * dpr;
+canvas.height = H * dpr;
+canvas.style.width  = W + 'px';
+canvas.style.height = H + 'px';
+ctx.scale(dpr, dpr);
+
+
+// ─────────────────────────────────────────────
 // SPRITES
 // ─────────────────────────────────────────────
 const SPRITES_B64 = {
