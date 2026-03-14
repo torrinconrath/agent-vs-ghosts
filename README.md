@@ -20,6 +20,6 @@ Throughout this game, you will need to dodge and shoot the incoming ghosts. You 
 #
 
 Feel free to leave suggestions for updates at 
-torrin@vt.edu
+torrinconrath@gmail.com
 
 Thank you!
