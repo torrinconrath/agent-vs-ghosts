@@ -17,6 +17,9 @@ Throughout this game, you will need to dodge and shoot the incoming ghosts. You 
 * Honey: The enemies will have their speeds cut in half.
 * Firecracker: The player will shoot rockets, which will explode when in proximity with an enemy. 
 
+# License
+All code and sprite work in this repository cannot be used without explicit permission from the author. Unauthorized copying, modification, distribution, or commercial use is strictly prohibited. 
+
 #
 
 Feel free to leave suggestions for updates at 
