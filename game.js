@@ -2,27 +2,27 @@
 // SPRITES
 // ─────────────────────────────────────────────
 const SPRITES_B64 = {
-  agent:          'images/agent.png',
-  saiyan:         'images/saiyan.png',
-  enemy:          'images/enemy.png',
-  zombie:         'images/zombie.png',
-  bullet:         'images/bullet.png',
-  gold_bullet:    'images/bullet_gold.png',
-  heart:          'images/heart.png',
-  shield:         'images/shield.png',
-  lightning:      'images/lightning.png',
-  cannon:         'images/cannon.png',
-  bomb:           'images/bomb.png',
-  bomb_exploding: 'images/bomb_exploding.png',
-  poison:         'images/poison.png',
-  barrier:        'images/barrier.png',
-  star:           'images/star.png',
-  honey:          'images/honey.png',
-  firecracker_u:  'images/firecracker/firecracker_u.png',
-  firecracker_l:  'images/firecracker/firecracker_l.png',
-  firecracker_r:  'images/firecracker/firecracker_r.png',
-  firecracker_d:  'images/firecracker/firecracker_d.png',
-  firework:       'images/firework.png'
+  agent:          'game_images/agent.png',
+  saiyan:         'game_images/saiyan.png',
+  enemy:          'game_images/enemy.png',
+  zombie:         'game_images/zombie.png',
+  bullet:         'game_images/bullet.png',
+  gold_bullet:    'game_images/bullet_gold.png',
+  heart:          'game_images/heart.png',
+  shield:         'game_images/shield.png',
+  lightning:      'game_images/lightning.png',
+  cannon:         'game_images/cannon.png',
+  bomb:           'game_images/bomb.png',
+  bomb_exploding: 'game_images/bomb_exploding.png',
+  poison:         'game_images/poison.png',
+  barrier:        'game_images/barrier.png',
+  star:           'game_images/star.png',
+  honey:          'game_images/honey.png',
+  firecracker_u:  'game_images/firecracker/firecracker_u.png',
+  firecracker_l:  'game_images/firecracker/firecracker_l.png',
+  firecracker_r:  'game_images/firecracker/firecracker_r.png',
+  firecracker_d:  'game_images/firecracker/firecracker_d.png',
+  firework:       'game_images/firework.png'
 };
 
 // ─────────────────────────────────────────────
