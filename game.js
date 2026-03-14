@@ -116,9 +116,9 @@ function createGame() {
     score: 0,
     tick: 0,
     // Spawn timing (ms equivalent via frame counting at 60fps)
-    spawnDelay: 120,      // 2000ms 
+    spawnDelay: 180,      // 3000ms 
     spawnTimer: 0,
-    spawnSpeedupInterval: 600, // 10000ms
+    spawnSpeedupInterval: 900, // 15000ms
     spawnSpeedupPct: 0.05,
     spawnSpeedupTimer: 0,
     powerupTimer: 0,
@@ -196,6 +196,7 @@ function update() {
     g.spawnTimer = 0;
     g.enemies.push(makeEnemy(ch));
   }
+
   // ── DIFFICULTY RAMP ──
   g.spawnSpeedupTimer++;
   if (g.spawnSpeedupTimer >= g.spawnSpeedupInterval) {
